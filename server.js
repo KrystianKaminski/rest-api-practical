@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const register = require("babel-core/register");
 const babelPolyfill = require("babel-polyfill");
+const songs = require("./src/routes/songs");
 
 require("dotenv").config();
 
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+
+app.use("/api/songs", songs());
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
