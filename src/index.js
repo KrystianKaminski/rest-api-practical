@@ -1,38 +1,42 @@
-import express from 'express';
-import { join } from 'path';
-import config from './config/config';
-import { notFound, catchErrors } from './middlewares/errors';
-import bodyParser from 'body-parser';
-import register from 'babel-core/register';
-import babelPolyfill from 'babel-polyfill';
+// import express from "express";
+// import { join } from "path";
+// import { notFound, catchErrors } from "./middlewares/errors";
+// import bodyParser from "body-parser";
+// import register from "babel-core/register";
+// import babelPolyfill from "babel-polyfill";
 
-// Connect to database
-import dbConfig from './config/database';
-import mongoose from 'mongoose';
+// import mongoose from "mongoose";
 
-mongoose.connect(dbConfig.mongoUrl);
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', (err) => {
-    console.log('Could not connect to the database. Exiting now...');
-    process.exit();
-});
+// const uri = process.env.ATLAS_URI;
+// mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+// const connection = mongoose.connection;
+// connection.once("open", () => {
+//   console.log("MongoDB database connection established successfully");
+// });
 
-const app = express();
+// mongoose.Promise = global.Promise;
+// // mongoose.connection.on("error", err => {
+// //   console.log("Could not connect to the database. Exiting now...");
+// //   process.exit();
+// // });
 
-app.set('view engine', 'pug');
-app.set('views', join(__dirname, 'views'));
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// const app = express();
+// const port = process.env.PORT || 5000;
 
-// routes config
-// ...
+// app.set("view engine", "pug");
+// app.set("views", join(__dirname, "views"));
+// app.use(express.static("public"));
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
-// errors handling
-app.use(notFound);
-app.use(catchErrors);
+// // routes config
+// // ...
 
-// let's play!
-app.listen(config.server.port, () => {
-    console.log(`Server is up!`);
-});
+// // errors handling
+// app.use(notFound);
+// app.use(catchErrors);
+
+// // let's play!
+// app.listen(port, () => {
+//   console.log(`Server is up!`);
+// });
